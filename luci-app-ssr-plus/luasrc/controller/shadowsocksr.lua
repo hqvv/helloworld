@@ -62,7 +62,7 @@ end
 
 function check_status()
 	local retstring = "1"
-	local set = "/usr/bin/ssr-check www." .. luci.http.formvalue("set") .. ".com 80 3 1"
+	local set = "/usr/bin/curl -I -m 5 -o /dev/null -s -w %{http_code} www." .. luci.http.formvalue("set") .. ".com"
 	sret = luci.sys.call(set)
 	if sret == 0 then
 		retstring = "0"
